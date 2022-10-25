@@ -23,7 +23,7 @@
 <!-- Conteúdo Principal: deslocado para direita em 270 pixels quando a sidebar é visível -->
 <div class="w3-main w3-container" style="margin-left:270px;margin-top:117px;">
 
-    <div class="w3-panel w3-padding-large w3-card-4 w3-light-grey">
+    <div class="w3-panel w3-padding-large w3-card-4 w3-light-blue">
         <p class="w3-large">
         <p>
         <div class="w3-code cssHigh notranslate">
@@ -37,8 +37,8 @@
                 echo $data;
                 echo "</p> "
             ?>
-            <div class="w3-container w3-theme">
-			<h2>Listagem de Medicos</h2>
+            <div class="w3-container w3-red">
+			<h2>Listagem de Alunos</h2>
 			</div>
 
             <!-- Acesso ao BD-->
@@ -62,69 +62,78 @@
 
                 // Faz Select na Base de Dados
 // ---------------> Email foi adicionado após Dt_Nasc
-                $sql = "SELECT pessoaId, matricula, peso, objetivo, altura, restricao FROM aluno";
+                $sql = "SELECT p.pessoaId, p.cpfCnpj, p.email, p.dataNascimento, p.genero, p.nome, p.cep, a.matricula, a.peso, a.objetivo, a.altura, a.restricao FROM pessoa AS p INNER JOIN aluno AS a ON (p.pessoaId = a.pessoaId) ORDER BY p.pessoaId";
                 echo "<div class='w3-responsive w3-card-4'>";
                 if ($result = mysqli_query($conn, $sql)) {
                     echo "<table class='w3-table-all'>";
                     echo "	<tr>";
-                    echo "	  <th width='7%'>Código</th>";
-                    echo "	  <th width='10%'>CRM</th>";
-                    echo "	  <th width='14%'>Imagem</th>";
-                    echo "	  <th width='14%'>Médico</th>";
-                    echo "	  <th width='15%'>Especialidade</th>";
-                    echo "	  <th width='8%'>Nascimento</th>";
-                    echo "	  <th width='8%'>Idade</th>";
-                    echo "	  <th width='10%'>Email</th>";
-                    echo "	  <th width='7%'> </th>";
-                    echo "	  <th width='7%'> </th>";
+                    echo "	  <th width='7%'>ID</th>";
+                    echo "	  <th width='7%'>Nome</th>";
+                    echo "	  <th width='7%'>Idade</th>";
+                    echo "	  <th width='7%'>CPF/CNPJ</th>";
+                    echo "	  <th width='7%'>Matrícula</th>";
+                    echo "	  <th width='7%'>Peso</th>";
+                    echo "	  <th width='7%'>Altura</th>";
+                    echo "	  <th width='15%'>Objetivo</th>";
+                    echo "	  <th width='15%'>Restrição</th>";
+                    // echo "	  <th width='8%'>Idade</th>";
+                    // echo "	  <th width='10%'>Email</th>";
+                    // echo "	  <th width='7%'> </th>";
+                    // echo "	  <th width='7%'> </th>";
                     echo "	</tr>";
                     if (mysqli_num_rows($result) > 0) {
                         // Apresenta cada linha da tabela
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $data = $row['Dt_Nasc'];
-                            list($ano, $mes, $dia) = explode('-', $data);
-                            $nova_data = $dia . '/' . $mes . '/' . $ano;
+                            // $data = $row['Dt_Nasc'];
+                            $dataNascimento = $row["dataNascimento"];
+                            list($ano, $mes, $dia) = explode('-', $dataNascimento);
+                            // $nova_data = $dia . '/' . $mes . '/' . $ano;
                             // data atual
                             $hoje = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
                             // Descobre a unix timestamp da data de nascimento do fulano
                             $nascimento = mktime( 0, 0, 0, $mes, $dia, $ano);
                             // cálculo
                             $idade = floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
-                            $cod = $row["ID_Medico"];
+                            $id = $row["pessoaId"];
+                            $matricula = $row["matricula"];
+                            $peso = $row["peso"];
+                            $objetivo = $row["objetivo"];
+                            $altura = $row["altura"];
+                            $restricao = $row["restricao"];
+                            $nome = $row["nome"];
+                            $cpfCnpj = $row["cpfCnpj"];
+                            
+                            // $cod = $row["ID_Medico"];
                             echo "<tr>";
                             echo "<td>";
-                            echo $cod;
+                            echo $id;
                             echo "</td><td>";
-                            echo $row["CRM"];
-                            if ($row['Foto']) {?>
-                                <td>
-                                    <img id="imagemSelecionada" class="w3-circle w3-margin-top" src="data:image/png;base64,<?= base64_encode($row['Foto']) ?>" />
-                                </td><td>
-                                <?php
-                            } else {
-                                ?>
-                                <td>
-                                    <img id="imagemSelecionada" class="w3-circle w3-margin-top" src="imagens/pessoa.jpg" />
-                                </td><td>
-                                <?php
-                            }
-                            echo $row["Nome"];
-                            echo "</td><td>";
-                            echo $row["Especialidade"];
-                            echo "</td><td>";
-                            echo $nova_data;
+                            echo $nome;
                             echo "</td><td>";
                             echo $idade;
                             echo "</td><td>";
-// -----------------------> Email foi adicionado após idade
-                            echo $row["Email"];
+                            echo $cpfCnpj;
+                            echo "</td><td>";
+                            echo $matricula;
+                            echo "</td><td>";
+                            echo $peso;
+                            echo "</td><td>";
+                            echo $altura;
+                            echo "</td><td>";
+                            echo $objetivo;
+                            echo "</td><td>";
+                            echo $restricao;
                             echo "</td>";
+// -----------------------> Email foi adicionado após idade
+                            // echo $row["Email"];
+                            // echo "</td>";
                             //Atualizar e Excluir registro de médicos
-            ?>              <td>       
+            ?>              
+                            <!-- <td>       
                             <a href='medAtualizar.php?id=<?php echo $cod; ?>'><img src='imagens/Edit.png' title='Editar Médico' width='32'></a>
                             </td><td>
                             <a href='medExcluir.php?id=<?php echo $cod; ?>'><img src='imagens/Delete.png' title='Excluir Médico' width='32'></a>
-                            </td>
+                            </td> -->
                             </tr>
             <?php
                         }
