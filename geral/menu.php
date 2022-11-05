@@ -39,7 +39,7 @@
 			<div class="w3-container">
 				<h3>Menu Médicos</h3>
 			</div>
-			<a class="w3-bar-item w3-button" href="medListar.php">Relação de Médicos</a>
+			<a class="w3-bar-item w3-button" href="alunoListar.php">Relação de alunos</a>
 			<a class="w3-bar-item w3-button" href="medIncluir.php">Cadastro de Médicos</a>
 
 
