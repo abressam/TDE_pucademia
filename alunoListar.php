@@ -9,11 +9,11 @@
 
 <html>
 <head>
-    <title>Clínica Médica ABC</title>
+    <title>Pucademia</title>
     <link rel="icon" type="image/png" href="imagens/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/customize.css">
+    <link rel="stylesheet" href="css/css.css">
 </head>
 <body  onload="w3_show_nav('menuMedico')">
 <!-- Inclui MENU.PHP  -->
@@ -71,15 +71,18 @@
                 if ($result = mysqli_query($conn, $sql)) {
                     echo "<table class='w3-table-all'>";
                     echo "	<tr>";
-                    echo "	  <th width='7%'>ID</th>";
-                    echo "	  <th width='7%'>Nome</th>";
-                    echo "	  <th width='7%'>Idade</th>";
+                    echo "	  <th width='1%'>ID</th>";
+                    echo "	  <th width='17%'>Nome</th>";
+                    echo "	  <th width='1%'>Idade</th>";
                     echo "	  <th width='7%'>CPF/CNPJ</th>";
                     echo "	  <th width='7%'>Matrícula</th>";
+                    echo "	  <th width='7%'>Plano</th>";
                     echo "	  <th width='7%'>Peso</th>";
                     echo "	  <th width='7%'>Altura</th>";
                     echo "	  <th width='15%'>Objetivo</th>";
                     echo "	  <th width='15%'>Restrição</th>";
+                    echo "	  <th width='7%'>Editar</th>";
+                    echo "	  <th width='7%'>Excluir</th>";
                     // echo "	  <th width='8%'>Idade</th>";
                     // echo "	  <th width='10%'>Email</th>";
                     // echo "	  <th width='7%'> </th>";
@@ -110,7 +113,7 @@
                             
                             // $cod = $row["ID_Medico"];
                             echo "<tr>";
-                            echo "<td>";
+                            echo '<td class="tr">';
                             echo $id;
                             echo "</td><td>";
                             echo $nome;
