@@ -3,6 +3,10 @@ localhost/phpmyadmin
 -Criar com o nome pucademia, usando latin1_swedish_nopad_ci
 -Rodar o sql abaixo
 
+
+
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
