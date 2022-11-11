@@ -1,11 +1,7 @@
 # TDE_pucademia
-localhost/phpmyadmin
--Criar com o nome pucademia, usando latin1_swedish_nopad_ci
--Rodar o sql abaixo
-
-
-
-
+#localhost/phpmyadmin
+#Criar com o nome pucademia, usando latin1_swedish_nopad_ci
+#Rodar o sql abaixo
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,7 +16,7 @@ descricao varchar(200)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE Pessoa (
-pessoaId int NOT NULL PRIMARY KEY,
+pessoaId int NOT NULL PRIMARY KEY AUTO_INCREMENT,
 nome varchar(100)  NOT NULL,
 cpfCnpj varchar(50) NOT NULL,
 email varchar(50) NOT NULL,
@@ -37,7 +33,6 @@ UNIQUE (cpfCnpj, email)
 
 CREATE TABLE Aluno (
 pessoaId int NOT NULL PRIMARY KEY,
-matricula varchar(20) NOT NULL UNIQUE,
 peso numeric(4,1),
 objetivo varchar(100),
 altura numeric(3,2),
@@ -45,26 +40,6 @@ restricao varchar(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE Aluno ADD CONSTRAINT FK_Aluno_1
-    FOREIGN KEY (pessoaId)
-    REFERENCES Pessoa (pessoaId);
-    
-CREATE TABLE Professor (
-    pessoaId int NOT NULL PRIMARY KEY,
-    jornadaTrabalho varchar(20) NOT NULL,
-    salario numeric(6,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE Professor ADD CONSTRAINT FK_Professor_2
-    FOREIGN KEY (pessoaId)
-    REFERENCES Pessoa (pessoaId);
-
-CREATE TABLE telefone (
-    pessoaId int,
-    telefone varchar(50),
-    PRIMARY KEY (telefone, pessoaId)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE telefone ADD CONSTRAINT FK_telefone_1
     FOREIGN KEY (pessoaId)
     REFERENCES Pessoa (pessoaId);
 
@@ -106,17 +81,27 @@ INSERT INTO Pessoa (pessoaId, nome, cpfCnpj, email, dataNascimento, genero, logr
 (19, 'Roberto Portugal', '12345678928', 'betto_pt@email.com', '1975/03/11', 'masculino', 'Rua da Felicidade, 85', 'Casa', '80000-0012', 'Santa Felicidade', 'Curitiba', 'Paraná'),
 (20, 'Clarice Madeira', '12345678929', 'cla_mad@email.com', '1998/02/12', 'feminino', 'Rua da Risada, 16', 'Casa', '80000-013', 'Portão', 'Curitiba', 'Paraná');
 
-INSERT INTO Aluno (pessoaId, matricula, peso, objetivo, altura, restricao) VALUES
-(1, '0001', 83.2, 'emagrecimento', 1.60, 'nenhuma'),
-(8, '0002', 89.0, 'emagrecimento, hipertrofia', 1.65, 'cirurgia pino pulso esquerdo'), 
-(9, '0003', 105.7, 'emagrecimento', 1.78, 'cuidar joelhos'),
-(11, '0004', 98.7, 'emagrecimento', 1.65, 'pressão alta'),
-(14, '0005', 62.0, 'emagrecimento, hipertrofia', 1.62, 'nenhuma'),
-(15, '0006', 56.2,  'hipertrofia', 1.75, 'nenhuma'),
-(16, '0007', 86.4, 'emagrecimento, fortalecer coluna', 1.65, 'cuidar coluna'),
-(17, '0008', 94.0, 'emagrecimento, hipertrofia', 1.80, 'cuidar ombros'),
-(18, '0009', 52.5, 'fortalecimento', 1.65, 'pressão baixa'),
-(19, '0010', 88.8, 'emagrecimento, hipertrofia', 1.86, 'nenhuma');
+INSERT INTO Aluno (pessoaId, peso, objetivo, altura, restricao) VALUES
+(1, 83.2, 'emagrecimento', 1.60, 'nenhuma'),
+(2, 59.3,'fortalecimento', 1.65, 'pressão baixa'),
+(3, 215.3,'emagrecimento', 1.69, 'obesidade mórbita'),
+(4, 59.4,'hipertrofia', 1.60, 'cuidar joelhos'),
+(5, 59.5,'fortalecimento', 1.75, 'nenhuma'),
+(6, 59.7,'fortalecimento', 1.55, 'pressão baixa'),
+(7, 59.6,'fortalecimento', 1.65, 'pressão baixa'),
+(10, 59.8,'fortalecimento', 1.65, 'pressão baixa'),
+(12, 59.9,'fortalecimento', 1.65, 'pressão baixa'),
+(13, 51.3,'fortalecimento', 1.65, 'pressão baixa'),
+(20, 53.3,'fortalecimento', 1.65, 'pressão baixa'),
+(8, 89.0, 'emagrecimento, hipertrofia', 1.65, 'cirurgia pino pulso esquerdo'), 
+(9, 105.7, 'emagrecimento', 1.78, 'cuidar joelhos'),
+(11, 98.7, 'emagrecimento', 1.65, 'pressão alta'),
+(14, 62.0, 'emagrecimento, hipertrofia', 1.62, 'nenhuma'),
+(15, 56.2,  'hipertrofia', 1.75, 'nenhuma'),
+(16, 86.4, 'emagrecimento, fortalecer coluna', 1.65, 'cuidar coluna'),
+(17, 94.0, 'emagrecimento, hipertrofia', 1.80, 'cuidar ombros'),
+(18, 52.5, 'fortalecimento', 1.65, 'pressão baixa'),
+(19, 88.8, 'emagrecimento, hipertrofia', 1.86, 'nenhuma');
 
 INSERT INTO Plano (planoId, nome, tempo, preco, descricao) VALUES
 ('PR12', 'Premium 12', 12, 199.90, 'Plano individual com acesso ilimitado às áreas da academia por 12 meses, sem fidelidade'),
@@ -133,6 +118,16 @@ INSERT INTO Plano (planoId, nome, tempo, preco, descricao) VALUES
 
 INSERT INTO aluno_plano (pessoaId, planoId, dataInicio, vigencia) VALUES
 (1,'PR12', '2022/01/01', 1),
+(2,'PR12', '2022/01/01', 1),
+(3,'PR12', '2022/01/01', 1),
+(4,'PR12', '2022/01/01', 1),
+(5,'VIP12', '2022/05/12', 1),
+(6,'VIP12', '2022/05/12', 1),
+(7,'VIP12', '2022/05/12', 1),
+(10,'FAM12', '2022/07/01', 1),
+(12,'FAM12', '2022/07/01', 1),
+(13,'FAM12', '2022/07/01', 1),
+(20,'FAM12', '2022/07/01', 1),
 (8, 'PR12', '2022/01/01', 1),
 (9, 'PR03', '2022/09/02', 1),
 (11, 'VIP12', '2022/05/12', 1),
@@ -142,41 +137,3 @@ INSERT INTO aluno_plano (pessoaId, planoId, dataInicio, vigencia) VALUES
 (17, 'FAM6', '2022/05/12', 1),
 (18, 'FAM12', '2022/07/01', 1),
 (19, 'FAM12', '2022/07/01', 1);
-
-INSERT INTO telefone (pessoaId, telefone) VALUES
-(1, '41-999999991'),
-(2, '41-999999992'),
-(3, '41-999999993'),
-(4, '41-999999994'),
-(5, '41-999999995'),
-(6, '41-999999996'),
-(7, '41-999999997'),
-(8, '41-999999998'),
-(9, '41-999999999'),
-(10, '41-999999990'),
-(11, '41-989999991'),
-(12, '41-989999992'),
-(13, '41-989999993'),
-(14, '41-989999994'),
-(14, '41-32323232'),
-(15, '41-989999995'),
-(15, '41-32323232'),
-(16, '41-989999996'),
-(16, '41-32323232'),
-(17, '41-989999997'),
-(17, '41-32323232'),
-(18, '41-989999998'),
-(19, '41-989999999'),
-(20, '41-989999990');
-
-INSERT INTO Professor (pessoaId, jornadaTrabalho, salario) VALUES
-(2, 'manhã', 3500.00),
-(3, 'tarde', 2000.00),
-(4, 'noite', 2500.00),
-(5, 'manhã', 3500.00),
-(6, 'tarde', 2000.00),
-(7, 'noite', 2500.00),
-(10, 'manhã', 3500.00),
-(12, 'tarde', 2000.00),
-(13, 'noite', 4500.00),
-(20, 'manhã', 3500.00);

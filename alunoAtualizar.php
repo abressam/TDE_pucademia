@@ -54,7 +54,7 @@
 				mysqli_query($conn, 'SET character_set_results=utf8');
 				
 				// Faz Select na Base de Dados
-				$sql = "SELECT p.pessoaId, p.cpfCnpj, p.email, p.dataNascimento, p.genero, p.nome, p.logradouro, p.complemento, p.cep, p.bairro, p.cidade, p.estado, a.matricula, a.peso, a.objetivo, a.altura, ap.planoId, a.restricao 
+				$sql = "SELECT p.pessoaId, p.cpfCnpj, p.email, p.dataNascimento, p.genero, p.nome, p.logradouro, p.complemento, p.cep, p.bairro, p.cidade, p.estado, a.peso, a.objetivo, a.altura, ap.planoId, a.restricao 
                         FROM pessoa AS p 
                             INNER JOIN aluno AS a ON (p.pessoaId = a.pessoaId)
                             INNER JOIN aluno_plano as ap ON (ap.pessoaId = a.pessoaId)
@@ -68,7 +68,6 @@
 						
 						$dataNascimento 	= $row["dataNascimento"];
 						$id 				= $row["pessoaId"];
-						$matricula 			= $row["matricula"];
 						$planoId 			= $row["planoId"];
 						$peso 				= $row["peso"];
 						$objetivo 			= $row["objetivo"];
@@ -85,24 +84,34 @@
 						$cidade 			= $row["cidade"];
 						$estado 			= $row["estado"];
 
+						$optionsGenero = array();
+						$todosGeneros = array('masculino', 'feminino','nao_informado');
+						$todosGenerosNome = array('Masculino', 'Feminino','Não informou');
+
+						for ($i = 0; $i < 3; $i++) {
+							$selected = "";
+							if ($genero == $todosGeneros[$i])
+								$selected = "selected";
+							array_push($optionsGenero, "\t\t\t<option " . $selected . " value='". $todosGeneros[$i] ."'>". $todosGenerosNome[$i] ."</option>\n");
+						}
 									
 						// Faz Select na Base de Dados
 						$sqlG = "SELECT nome, planoId FROM plano";
 							
-						$optionsEspec = array();
+						$optionsPlano = array();
 						
 						if ($result = mysqli_query($conn, $sqlG)) {
 							while ($row = mysqli_fetch_assoc($result)) {
 								$selected = "";
 								if ($row['planoId'] == $planoId)
 									$selected = "selected";
-								array_push($optionsEspec, "\t\t\t<option " . $selected . " value='". $row["planoId"] ."'>". $row["nome"] ."</option>\n");
+								array_push($optionsPlano, "\t\t\t<option " . $selected . " value='". $row["planoId"] ."'>". $row["nome"] ."</option>\n");
 							}
 						}
 
 						?>
 						<div class="w3-container w3-theme">
-							<h2>Altere os dados do aluno com a matrícula <?php echo $matricula; ?></h2>
+							<h2>Altere os dados do aluno com a matrícula <?php echo $id; ?></h2>
 						</div>
 						<form class="w3-container" action="alunoAtualizar_exe.php" method="post" enctype="multipart/form-data">
 							<table class='w3-table-all flex-container'>
@@ -114,6 +123,14 @@
 									<label class="w3-text-IE"><b>Nome</b></label>
 									<input class="w3-input w3-border w3-light-grey " name="nome" type="text" pattern="[a-zA-Z\u00C0-\u00FF ]{10,100}$" placeholder="Informe um nome..." title="Nome entre 10 e 100 letras." value="<?php echo $nome; ?>" required></p>
 
+									<label class="w3-text-IE"><b>Gênero</b>*</label>
+									<select name="genero" id="genero" class="w3-input w3-border w3-light-grey " required>
+										<?php
+											foreach($optionsGenero as $key => $value){
+												echo $value;
+											}
+										?>
+									</select></p>
 
 									<label class="w3-text-IE"><b>Data de nascimento</b>*</label>
 									<input class="w3-input w3-border w3-light-grey " name="dataNascimento" id="dataNascimento"  type="date" maxlength="15" placeholder="dd/mm/aaaa" title="dd/mm/aaaa" value="<?php echo $dataNascimento; ?>" required></p>
@@ -122,7 +139,7 @@
 									<label class="w3-text-IE"><b>Plano</b>*</label>
 									<select name="planoId" id="planoId" class="w3-input w3-border w3-light-grey " required>
 									<?php
-										foreach($optionsEspec as $key => $value){
+										foreach($optionsPlano as $key => $value){
 											echo $value;
 										}
 									?>

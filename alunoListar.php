@@ -62,7 +62,7 @@
 
                 // Faz Select na Base de Dados
 // ---------------> Email foi adicionado após Dt_Nasc
-                $sql = "SELECT p.pessoaId, p.cpfCnpj, p.email, p.dataNascimento, p.genero, p.nome, p.cep, a.matricula, a.peso, a.objetivo, a.altura, ap.planoId, a.restricao 
+                $sql = "SELECT p.pessoaId, p.cpfCnpj, p.email, p.dataNascimento, p.genero, p.nome, p.cep, a.peso, a.objetivo, a.altura, ap.planoId, a.restricao 
                         FROM pessoa AS p 
                             INNER JOIN aluno AS a ON (p.pessoaId = a.pessoaId)
                             INNER JOIN aluno_plano as ap ON (ap.pessoaId = a.pessoaId)
@@ -75,7 +75,6 @@
                     echo "	  <th width='17%'>Nome</th>";
                     echo "	  <th width='1%'>Idade</th>";
                     echo "	  <th width='7%'>CPF/CNPJ</th>";
-                    echo "	  <th width='7%'>Matrícula</th>";
                     echo "	  <th width='7%'>Plano</th>";
                     echo "	  <th width='7%'>Peso</th>";
                     echo "	  <th width='7%'>Altura</th>";
@@ -102,7 +101,7 @@
                             // cálculo
                             $idade = floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
                             $id = $row["pessoaId"];
-                            $matricula = $row["matricula"];
+                            // $matricula = $row["matricula"];
                             $planoId = $row["planoId"];
                             $peso = $row["peso"];
                             $objetivo = $row["objetivo"];
@@ -121,8 +120,6 @@
                             echo $idade;
                             echo "</td><td>";
                             echo $cpfCnpj;
-                            echo "</td><td>";
-                            echo $matricula;
                             echo "</td><td>";
                             echo $planoId;
                             echo "</td><td>";

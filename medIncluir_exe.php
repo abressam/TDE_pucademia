@@ -10,8 +10,8 @@
 <html>
 	<head>
 
-	  <title>IE - Instituição de Ensino</title>
-	  <link rel="icon" type="image/png" href="imagens/IE_favicon.png" />
+	  <title>Pucademia</title>
+	  <link rel="icon" type="image/png" href="imagens/favicon.png" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	  <link rel="stylesheet" href="css/customize.css">
@@ -39,12 +39,23 @@
 
 	<!-- Acesso ao BD-->
 	<?php
-		$nome    = $_POST['Nome'];
-		$CRM     = $_POST['CRM'];
-		$dtNasc  = $_POST['DataNasc'];
-		$espec   = $_POST['Especialidade'];
-		
-		
+		$dataNascimento 	= $_POST["dataNascimento"];
+		$genero 			= $_POST["genero"];
+		$planoId 			= $_POST["planoId"];
+		$peso 				= $_POST["peso"];
+		$objetivo 			= $_POST["objetivo"];
+		$altura 			= $_POST["altura"];
+		$restricao 			= $_POST["restricao"];
+		$nome 				= $_POST["nome"];
+		$cpfCnpj 			= $_POST["cpfCnpj"];
+		$email 				= $_POST["email"];
+		$logradouro 		= $_POST["logradouro"];
+		$complemento 		= $_POST["complemento"];
+		$cep 				= $_POST["CEP"];
+		$bairro 			= $_POST["bairro"];
+		$cidade 			= $_POST["cidade"];
+		$estado 			= $_POST["estado"];
+		$hoje 				= date('Y/m/d H:i');		
 		 
 		// Cria conexão
 		$conn = mysqli_connect($servername, $username, $password, $database);
@@ -59,28 +70,68 @@
 		mysqli_query($conn,'SET character_set_client=utf8');
 		mysqli_query($conn,'SET character_set_results=utf8');
 
-		// Faz Select na Base de Dados
+		// Faz INSERT na Base de Dados
+		// INSERT INTO Pessoa (pessoaId, nome, cpfCnpj, email, dataNascimento, genero, logradouro, complemento, cep, bairro, cidade, estado) VALUES
+		// (1, 'Aline Mattos', '12345678910', 'aline_m@email.com', '1995/12/04'
+		// $sql = "INSERT INTO Pessoa (nome, cpfCnpj, email, dataNascimento, genero, logradouro, complemento, cep, bairro, cidade, estado) VALUES
+		// ('$nome', '$cpfCnpj', '$email', '$dataNascimento', '$genero', '$logradouro', '$complemento', '$cep', '$bairro', '$cidade', '$estado')
+		// SELECT LAST_INSERT_ID() AS pessoaId;
+		// ";	
+		// $sql2 = "INSERT INTO aluno (peso, objetivo, altura, restricao) VALUES ('$peso', '$objetivo', '$altura', '$restricao')";
 
-		if ($_FILES['Imagem']['size'] == 0) { // Não recebeu uma imagem binária
-			$sql = "INSERT INTO Medico (Nome, CRM, Dt_Nasc, ID_Espec, Foto) VALUES ('$nome','$CRM','$dtNasc', '$espec', NULL)";
-		} else {                              // Recebeu uma imagem binária
-			$imagem = addslashes(file_get_contents($_FILES['Imagem']['tmp_name'])); // Prepara para salvar em BD
-			$sql = "INSERT INTO Medico (Nome, CRM, Dt_Nasc, ID_Espec, Foto) VALUES ('$nome','$CRM','$dtNasc', '$espec','$imagem')";
-		}
+		// $sql3 = "INSERT INTO aluno_plano (planoId, dataInicio) VALUES ('$planoId', '$hoje')";
+
+		// if ($result = mysqli_query($conn, $sql)) {
+		// 	$row = mysqli_fetch_assoc($result);
+		// 	$pessoaId = $row["pessoaId"]
+
+		// 	$sql2 = "INSERT INTO aluno (pessoaId, peso, objetivo, altura, restricao) VALUES ('$pessoaId', '$peso', '$objetivo', '$altura', '$restricao')";
+
+		// 	$sql3 = "INSERT INTO aluno_plano (pessoaId, planoId, dataInicio) VALUES ('$pessoaId', '$planoId', '$hoje')";
+
+		// 	if ($result = mysqli_query($conn, $sql2) and $result = mysqli_query($conn, $sql3)) {
+		// 		echo "<p>&nbsp;Registro cadastrado com sucesso! </p>";
+		// 	} else {
+		// 		echo "<p>&nbsp;Erro executando INSERT: " . mysqli_error($conn . "</p>");
+		// 	}
+		// } else {
+		// 	echo "<p>&nbsp;Erro executando INSERT: " . mysqli_error($conn . "</p>");
+		// }
+
 		?>
 		<div class='w3-responsive w3-card-4'>
 		<div class="w3-container w3-theme">
-		<h2>Inclusão de Novo Médico</h2>
+		<h2>Inclusão de Novo Aluno</h2>
 		</div>
 		<?php
-		if ($result = mysqli_query($conn, $sql)) {
-			echo "<p>&nbsp;Registro cadastrado com sucesso! </p>";
+	
+		$sql = "INSERT INTO Pessoa (nome, cpfCnpj, email, dataNascimento, genero, logradouro, complemento, cep, bairro, cidade, estado) VALUES
+		('$nome', '$cpfCnpj', '$email', '$dataNascimento', '$genero', '$logradouro', '$complemento', '$cep', '$bairro', '$cidade', '$estado');
+		SELECT LAST_INSERT_ID() AS pessoaId;
+		";
+
+		mysqli_multi_query($conn, $sql);
+		mysqli_next_result($conn);
+
+		
+		if ($result = mysqli_store_result($conn)) {
+			$row = mysqli_fetch_assoc($result);
+			$pessoaId = $row["pessoaId"];
+
+			$sql2 = "INSERT INTO aluno (pessoaId, peso, objetivo, altura, restricao) VALUES ('$pessoaId', '$peso', '$objetivo', '$altura', '$restricao')";
+
+			$sql3 = "INSERT INTO aluno_plano (pessoaId, planoId, dataInicio) VALUES ('$pessoaId', '$planoId', '$hoje')";
+
+			if ($result = mysqli_query($conn, $sql2) and $result = mysqli_query($conn, $sql3)) {
+				echo "<p>&nbsp;Registro cadastrado com sucesso! </p>";
+			} else {
+				echo "<p>&nbsp;Erro executando INSERT: " . mysqli_error($conn . "</p>");
+			}
 		} else {
 			echo "<p>&nbsp;Erro executando INSERT: " . mysqli_error($conn . "</p>");
 		}
-        echo "</div>";
-		mysqli_close($conn);  //Encerra conexao com o BD
-
+			echo "</div>";
+			mysqli_close($conn);  //Encerra conexao com o BD
 	?>
   </div>
 </div>

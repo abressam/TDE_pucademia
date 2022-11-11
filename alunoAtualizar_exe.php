@@ -10,7 +10,7 @@
 <html>
 	<head>
 	  <title>Pucademia</title>
-	  <link rel="icon" type="image/png" href="imagens/IE_favicon.png" />
+	  <link rel="icon" type="image/png" href="imagens/favicon.png" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	  <link rel="stylesheet" href="css/customize.css">
@@ -45,6 +45,7 @@
 			// Recebe os dados que foram preenchidos no formulário, com os valores que serão atualizados
 			$dataNascimento 	= $_POST["dataNascimento"];
 			$id 				= $_POST["Id"];
+			$genero 			= $_POST["genero"];
 			$planoId 			= $_POST["planoId"];
 			$peso 				= $_POST["peso"];
 			$objetivo 			= $_POST["objetivo"];
@@ -80,7 +81,7 @@
 		
 			// Faz Update na Base de Dados
 			$sql = "UPDATE pessoa
-					SET nome = '$nome', dataNascimento = '$dataNascimento', cpfCnpj = '$cpfCnpj', email = '$email', logradouro = '$logradouro', complemento = '$complemento', cep = '$cep', bairro = '$bairro', cidade = '$cidade', estado = '$estado'
+					SET nome = '$nome', dataNascimento = '$dataNascimento', cpfCnpj = '$cpfCnpj', email = '$email', genero = '$genero', logradouro = '$logradouro', complemento = '$complemento', cep = '$cep', bairro = '$bairro', cidade = '$cidade', estado = '$estado'
 					WHERE pessoaId = $id";	
 			
 			$sql2 = "UPDATE aluno

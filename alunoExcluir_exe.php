@@ -60,8 +60,6 @@
 
 		$sql2 = "DELETE FROM aluno WHERE pessoaId = $id";
 
-		$sql3 = "DELETE FROM telefone WHERE pessoaId = $id";
-
 		$sql4 = "DELETE FROM pessoa WHERE pessoaId = $id";
 
 		echo "<div class='w3-responsive w3-card-4'>";
