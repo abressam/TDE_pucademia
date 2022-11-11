@@ -10,8 +10,8 @@
 <html>
 	<head>
 
-	  <title>IE - Instituição de Ensino</title>
-	  <link rel="icon" type="image/png" href="imagens/IE_favicon.png" />
+	  <title>Pucademia</title>
+	  <link rel="icon" type="image/png" href="imagens/favicon.png" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	  <link rel="stylesheet" href="css/customize.css">
@@ -38,7 +38,7 @@
 	echo "</p> "
 	?>
 	<div class="w3-container w3-theme">
-	<h2>Exclusão de Médico</h2>
+	<h2>Exclusão de Aluno</h2>
 	</div>
 
 	<!-- Acesso ao BD-->
@@ -56,10 +56,16 @@
 		}
 
 		// Faz DELETE na Base de Dados
-		$sql = "DELETE FROM Medico WHERE ID_Medico = $id";
+		$sql = "DELETE FROM aluno_plano	WHERE pessoaId = $id";
+
+		$sql2 = "DELETE FROM aluno WHERE pessoaId = $id";
+
+		$sql3 = "DELETE FROM telefone WHERE pessoaId = $id";
+
+		$sql4 = "DELETE FROM pessoa WHERE pessoaId = $id";
 
 		echo "<div class='w3-responsive w3-card-4'>";
-		if ($result = mysqli_query($conn, $sql)) {
+		if ($result = mysqli_query($conn, $sql) and $result = mysqli_query($conn, $sql2) and $result = mysqli_query($conn, $sql3) and $result = mysqli_query($conn, $sql4)) {
 			echo "<p>&nbsp;Registro excluído com sucesso! </p>";
 		} else {
 			echo "<p>&nbsp;Erro executando DELETE: " . mysqli_error($conn . "</p>");

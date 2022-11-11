@@ -9,7 +9,7 @@
 
 <html>
 	<head>
-	  <title>IE - Instituição de Ensino</title>
+	  <title>Pucademia</title>
 	  <link rel="icon" type="image/png" href="imagens/IE_favicon.png" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -38,7 +38,7 @@
 		echo "</p> "
 		?>
 		<div class="w3-container w3-theme">
-		<h2>Atualização de Médico</h2>
+		<h2>Atualização de Aluno</h2>
 		</div>
 		<!-- Acesso ao BD-->
 		<?php
