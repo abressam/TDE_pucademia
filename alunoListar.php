@@ -140,7 +140,7 @@
                             <a href='alunoAtualizar.php?id=<?php echo $id; ?>'><img src='imagens/Edit.png' title='Editar aluno' width='32'></a>
                             </td>
                             <td>
-                            <a href='medExcluir.php?id=<?php echo $id; ?>'><img src='imagens/Delete.png' title='Excluir aluno' width='32'></a>
+                            <a href='alunoExcluir.php?id=<?php echo $id; ?>'><img src='imagens/Delete.png' title='Excluir aluno' width='32'></a>
                             </td>
                             </tr>
             <?php

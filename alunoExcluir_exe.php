@@ -60,10 +60,10 @@
 
 		$sql2 = "DELETE FROM aluno WHERE pessoaId = $id";
 
-		$sql4 = "DELETE FROM pessoa WHERE pessoaId = $id";
+		$sql3 = "DELETE FROM pessoa WHERE pessoaId = $id";
 
 		echo "<div class='w3-responsive w3-card-4'>";
-		if ($result = mysqli_query($conn, $sql) and $result = mysqli_query($conn, $sql2) and $result = mysqli_query($conn, $sql3) and $result = mysqli_query($conn, $sql4)) {
+		if ($result = mysqli_query($conn, $sql) and $result = mysqli_query($conn, $sql2) and $result = mysqli_query($conn, $sql3)) {
 			echo "<p>&nbsp;Registro excluído com sucesso! </p>";
 		} else {
 			echo "<p>&nbsp;Erro executando DELETE: " . mysqli_error($conn . "</p>");
