@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<!-------------------------------------------------------------------------------
-    Desenvolvimento Web
-    PUCPR
-    Profa. Cristina V. P. B. Souza
-    Agosto/2022
----------------------------------------------------------------------------------->
-<!-- medAtualizar.php --> 
 
 <html>
 	<head>
@@ -13,9 +6,9 @@
 	  <link rel="icon" type="image/png" href="imagens/favicon.png" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	  <link rel="stylesheet" href="css/customize.css">
+	  <link rel="stylesheet" href="css/customizes.css">
 	</head>
-	<body onload="w3_show_nav('menuMedico')">
+	<body onload="w3_show_nav('menuAcademia')">
 	<!-- Inclui MENU.PHP  -->
 	<?php require 'geral/menu.php'; ?>
 	<?php require 'bd/conectaBD.php'; ?>

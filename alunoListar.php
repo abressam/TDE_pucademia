@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<!-------------------------------------------------------------------------------
-    Desenvolvimento Web
-    PUCPR
-    Profa. Cristina V. P. B. Souza
-    Agosto/2022
----------------------------------------------------------------------------------->
-<!-- medListar.php -->
 
 <html>
 <head>
@@ -13,9 +6,9 @@
     <link rel="icon" type="image/png" href="imagens/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" href="css/customizes.css">
 </head>
-<body  onload="w3_show_nav('menuMedico')">
+<body  onload="w3_show_nav('menuAcademia')">
 <!-- Inclui MENU.PHP  -->
 <?php require 'geral/menu.php'; ?>
 <?php require 'bd/conectaBD.php'; ?>
@@ -23,7 +16,7 @@
 <!-- Conteúdo Principal: deslocado para direita em 270 pixels quando a sidebar é visível -->
 <div class="w3-main w3-container" style="margin-left:270px;margin-top:117px;">
 
-    <div class="w3-panel w3-padding-large w3-card-4 w3-light-blue">
+    <div class="w3-panel w3-padding-large w3-card-4 background-second-layer-info">
         <p class="w3-large">
         <p>
         <div class="w3-code cssHigh notranslate">
@@ -37,7 +30,7 @@
                 echo $data;
                 echo "</p> "
             ?>
-            <div class="w3-container w3-red">
+            <div class="w3-container w3-theme">
 			<h2>Listagem de Alunos</h2>
 			</div>
 
@@ -61,7 +54,7 @@
                 mysqli_query($conn,'SET character_set_results=utf8');
 
                 // Faz Select na Base de Dados
-// ---------------> Email foi adicionado após Dt_Nasc
+
                 $sql = "SELECT p.pessoaId, p.cpfCnpj, p.email, p.dataNascimento, p.genero, p.nome, p.cep, a.peso, a.objetivo, a.altura, ap.planoId, a.restricao 
                         FROM pessoa AS p 
                             INNER JOIN aluno AS a ON (p.pessoaId = a.pessoaId)
@@ -82,15 +75,11 @@
                     echo "	  <th width='15%'>Restrição</th>";
                     echo "	  <th width='7%'>Editar</th>";
                     echo "	  <th width='7%'>Excluir</th>";
-                    // echo "	  <th width='8%'>Idade</th>";
-                    // echo "	  <th width='10%'>Email</th>";
-                    // echo "	  <th width='7%'> </th>";
-                    // echo "	  <th width='7%'> </th>";
                     echo "	</tr>";
                     if (mysqli_num_rows($result) > 0) {
                         // Apresenta cada linha da tabela
                         while ($row = mysqli_fetch_assoc($result)) {
-                            // $data = $row['Dt_Nasc'];
+                            // $data = $row['dataNascimento'];
                             $dataNascimento = $row["dataNascimento"];
                             list($ano, $mes, $dia) = explode('-', $dataNascimento);
                             // $nova_data = $dia . '/' . $mes . '/' . $ano;
@@ -101,7 +90,6 @@
                             // cálculo
                             $idade = floor((((($hoje - $nascimento) / 60) / 60) / 24) / 365.25);
                             $id = $row["pessoaId"];
-                            // $matricula = $row["matricula"];
                             $planoId = $row["planoId"];
                             $peso = $row["peso"];
                             $objetivo = $row["objetivo"];
@@ -110,7 +98,6 @@
                             $nome = $row["nome"];
                             $cpfCnpj = $row["cpfCnpj"];
                             
-                            // $cod = $row["ID_Medico"];
                             echo "<tr>";
                             echo '<td class="tr">';
                             echo $id;
@@ -131,10 +118,7 @@
                             echo "</td><td>";
                             echo $restricao;
                             echo "</td>";
-// -----------------------> Email foi adicionado após idade
-                            // echo $row["Email"];
-                            // echo "</td>";
-                            //Atualizar e Excluir registro de médicos
+
             ?>              
                             <td>       
                             <a href='alunoAtualizar.php?id=<?php echo $id; ?>'><img src='imagens/Edit.png' title='Editar aluno' width='32'></a>

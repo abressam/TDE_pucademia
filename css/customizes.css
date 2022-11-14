@@ -1,10 +1,20 @@
 .w3-theme {
     color: #ffff !important;
-    background-color: #5D6D7E !important
+    background-color: #ff8e01 !important
 }
 
 .w3-code {
-    border-left: 4px solid #9FC2E8
+    border-left: 4px solid #ff8e01;
+    color: black !important;
+}
+
+.background-page, body {
+    background-color: #463F3A !important;
+    color: #fff !important;
+}
+
+.background-second-layer-info {
+    background-color: #4E4946;
 }
 
 .w3-text-IE {
@@ -27,4 +37,8 @@
 td, th {
     text-align: center !important;
     vertical-align: middle !important;
+}
+
+.font-color-about {
+    color: black;
 }

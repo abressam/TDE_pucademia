@@ -1,12 +1,4 @@
 <!DOCTYPE html>
-<!-------------------------------------------------------------------------------
-    Desenvolvimento Web
-    PUCPR
-    Profa. Cristina V. P. B. Souza
-    Agosto/2022
----------------------------------------------------------------------------------->
-<!-- medIncluir_exe.php -->
-
 <html>
 	<head>
 
@@ -14,9 +6,9 @@
 	  <link rel="icon" type="image/png" href="imagens/favicon.png" />
 	  <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	  <link rel="stylesheet" href="css/customize.css">
+	  <link rel="stylesheet" href="css/customizes.css">
 	</head>
-<body onload="w3_show_nav('menuMedico')">
+<body onload="w3_show_nav('menuAcademia')">
 <!-- Inclui MENU.PHP  -->
 <?php require 'geral/menu.php';?>
 <?php require 'bd/conectaBD.php'; ?>
@@ -70,41 +62,15 @@
 		mysqli_query($conn,'SET character_set_client=utf8');
 		mysqli_query($conn,'SET character_set_results=utf8');
 
-		// Faz INSERT na Base de Dados
-		// INSERT INTO Pessoa (pessoaId, nome, cpfCnpj, email, dataNascimento, genero, logradouro, complemento, cep, bairro, cidade, estado) VALUES
-		// (1, 'Aline Mattos', '12345678910', 'aline_m@email.com', '1995/12/04'
-		// $sql = "INSERT INTO Pessoa (nome, cpfCnpj, email, dataNascimento, genero, logradouro, complemento, cep, bairro, cidade, estado) VALUES
-		// ('$nome', '$cpfCnpj', '$email', '$dataNascimento', '$genero', '$logradouro', '$complemento', '$cep', '$bairro', '$cidade', '$estado')
-		// SELECT LAST_INSERT_ID() AS pessoaId;
-		// ";	
-		// $sql2 = "INSERT INTO aluno (peso, objetivo, altura, restricao) VALUES ('$peso', '$objetivo', '$altura', '$restricao')";
-
-		// $sql3 = "INSERT INTO aluno_plano (planoId, dataInicio) VALUES ('$planoId', '$hoje')";
-
-		// if ($result = mysqli_query($conn, $sql)) {
-		// 	$row = mysqli_fetch_assoc($result);
-		// 	$pessoaId = $row["pessoaId"]
-
-		// 	$sql2 = "INSERT INTO aluno (pessoaId, peso, objetivo, altura, restricao) VALUES ('$pessoaId', '$peso', '$objetivo', '$altura', '$restricao')";
-
-		// 	$sql3 = "INSERT INTO aluno_plano (pessoaId, planoId, dataInicio) VALUES ('$pessoaId', '$planoId', '$hoje')";
-
-		// 	if ($result = mysqli_query($conn, $sql2) and $result = mysqli_query($conn, $sql3)) {
-		// 		echo "<p>&nbsp;Registro cadastrado com sucesso! </p>";
-		// 	} else {
-		// 		echo "<p>&nbsp;Erro executando INSERT: " . mysqli_error($conn . "</p>");
-		// 	}
-		// } else {
-		// 	echo "<p>&nbsp;Erro executando INSERT: " . mysqli_error($conn . "</p>");
-		// }
-
 		?>
 		<div class='w3-responsive w3-card-4'>
 		<div class="w3-container w3-theme">
 		<h2>Inclusão de Novo Aluno</h2>
 		</div>
 		<?php
-	
+		
+		// Faz INSERT na Base de Dados
+		
 		$sql = "INSERT INTO Pessoa (nome, cpfCnpj, email, dataNascimento, genero, logradouro, complemento, cep, bairro, cidade, estado) VALUES
 		('$nome', '$cpfCnpj', '$email', '$dataNascimento', '$genero', '$logradouro', '$complemento', '$cep', '$bairro', '$cidade', '$estado');
 		SELECT LAST_INSERT_ID() AS pessoaId;

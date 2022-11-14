@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<!-------------------------------------------------------------------------------
-    Desenvolvimento Web
-    PUCPR
-    Profa. Cristina V. P. B. Souza
-    Agosto/2022
----------------------------------------------------------------------------------->
-<!-- medIncluir.php -->
 
 <html>
 <head>
@@ -14,10 +7,10 @@
     <link rel="icon" type="image/png" href="imagens/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="css/customize.css">
+    <link rel="stylesheet" href="css/customizes.css">
 	
 </head>
-<body  onload="w3_show_nav('menuMedico')">
+<body  onload="w3_show_nav('menuAcademia')">
 
 <!-- Inclui MENU.PHP  -->
 <?php require 'geral/menu.php';?>
@@ -81,10 +74,10 @@
                     <div class="w3-container w3-theme">
                         <h2>Informe os dados do novo do Aluno</h2>
                     </div>
-                    <form class="w3-container" action="medIncluir_exe.php" method="post" enctype="multipart/form-data">
+                    <form class="w3-container" action="alunoIncluir_exe.php" method="post" enctype="multipart/form-data">
 					<table class='w3-table-all'>
 						<tr>
-							<td style="width:50%;">
+							<td style="width:50%; text-align: left !important">
 
 							<label class="w3-text-IE"><b>Nome</b></label>
 							<input class="w3-input w3-border w3-light-grey " name="nome" type="text" pattern="[a-zA-Z\u00C0-\u00FF ]{10,100}$" placeholder="Informe um nome..." title="Nome entre 10 e 100 letras." required></p>

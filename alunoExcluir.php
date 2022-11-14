@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<!-------------------------------------------------------------------------------
-    Desenvolvimento Web
-    PUCPR
-    Profa. Cristina V. P. B. Souza
-    Agosto/2022
----------------------------------------------------------------------------------->
-<!-- medExcluir.php -->
 
 <html>
 <head>
-
     <title>Pucademia</title>
     <link rel="icon" type="image/png" href="imagens/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="css/customize.css">
+	<link rel="stylesheet" href="css/customizes.css">
 </head>
-<body onload="w3_show_nav('menuMedico')">
+<body onload="w3_show_nav('menuAcademia')">
 
 <!-- Inclui MENU.PHP  -->
 <?php require 'geral/menu.php';?>
@@ -56,10 +48,9 @@
 				mysqli_query($conn,'SET character_set_results=utf8');
 
 				$id=$_GET['id'];
-				
-				// Faz Select na Base de Dados
-				// $sql = "SELECT ID_Medico, CRM, Nome, Nome_Espec AS Especialidade, Foto, Dt_Nasc FROM Medico AS M INNER JOIN Especialidade AS E ON (M.ID_Espec = E.ID_Espec) WHERE ID_Medico = $id;";
+
 				$sql = "SELECT p.pessoaId, p.cpfCnpj, p.email, p.dataNascimento, p.genero, p.nome, p.cep, a.peso, a.objetivo, a.altura, ap.planoId, a.restricao FROM pessoa AS p INNER JOIN aluno AS a ON (p.pessoaId = a.pessoaId) INNER JOIN aluno_plano AS ap ON (ap.pessoaId = a.pessoaId) WHERE p.pessoaId = $id;";
+				
 				//Inicio DIV form
 				echo "<div class='w3-responsive w3-card-4'>";  
 				 if ($result = mysqli_query($conn, $sql)) {

@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<!-------------------------------------------------------------------------------
-    Desenvolvimento Web
-    PUCPR
-    Profa. Cristina V. P. B. Souza
-    Agosto/2022
----------------------------------------------------------------------------------->
-<!-- MedAtualizar.php -->
 
 <html>
 	<head>
@@ -13,9 +6,9 @@
 		<link rel="icon" type="image/png" href="imagens/favicon.png"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<link rel="stylesheet" href="css/customize.css">
+		<link rel="stylesheet" href="css/customizes.css">
 	</head>
-<body onload="w3_show_nav('menuMedico')" >
+<body onload="w3_show_nav('menuAcademia')" >
 	<!-- Inclui MENU.PHP  -->
 	<?php require 'geral/menu.php'; ?>
 	<?php require 'bd/conectaBD.php'; ?>
@@ -116,7 +109,7 @@
 						<form class="w3-container" action="alunoAtualizar_exe.php" method="post" enctype="multipart/form-data">
 							<table class='w3-table-all flex-container'>
 								<tr>
-									<td style="width:50%;">
+									<td style="width:50%; text-align: left !important">
 
 									<input type="hidden" id="Id" name="Id" value="<?php echo $id; ?>">
 
